@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>Timestamp Microservice | freeCodeCamp.org</title>
+      <link rel="shortcut icon" href="https://cdn.freecodecamp.org/universal/favicons/favicon-32x32.png" type="image/x-icon"/>
+      <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
+      <link href="style.css" rel="stylesheet" type="text/css">
+   </head>
+
+   <body>
+      <h1>Timestamp Microservice</h1>
+      <hr />
+      <div class="container">
+         <h3>Press Submit</h3>
+         <form id="dateForm">
+            <input type="text" id="dateInput" placeholder="YYYY-MM-DD" />
+            <button type="submit">Submit</button>
+         </form>
+
+         <h3> Output:</h3>
+         <div id="output"></div>
+      </div>
+      <div class="footer">
+         <p>
+            By <a href="https://www.freecodecamp.org/">freeCodeCamp.org</a>
+         </p>
+      </div>
+
+      <script>
+         document.getElementById('dateForm').addEventListener('submit', function (event) {
+            event.preventDefault();
+            const dateInput = document.getElementById('dateInput').value;
+            fetch(`/api/${dateInput}`)
+               .then(response => response.json())
+               .then(data => {
+                  const output = document.getElementById('output');
+                  output.innerHTML = JSON.stringify(data);
+               })
+               .catch(error => console.log(error));
+         });
+      </script>
+   </body>
+</html>
